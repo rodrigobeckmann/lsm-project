@@ -1,5 +1,6 @@
 import SubMenu from "./SubMenu";
 import { useState } from "react";
+import menuData from "../MenuData";
 
 function SideMenu() {
 
@@ -13,6 +14,10 @@ function SideMenu() {
 
   return (
     <nav>
+
+      {menuData.map((menuElement) =>
+        <button>{menuElement.tittle}</button>)}
+
       <button
         onClick={() => subMenu.home === false ? setSubMenu({ ...subMenu, home: true }) : setSubMenu({ ...subMenu, home: false })}
         id="home">Inicio</button>
