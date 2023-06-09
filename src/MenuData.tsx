@@ -1,14 +1,46 @@
+import InWork from "./components/InWork";
+
+const inWork = () => {
+  return <InWork />
+}
+
 const menuData = [
   {
     tittle: 'Inicio',
   },
   {
     tittle: 'Cadastro',
-    subMenu: ['opt1', 'opt2', 'opt3']
+    subMenu: [
+      {
+        tittle: 'opt1',
+        component: <InWork />,
+      },
+      {
+        tittle: 'opt2',
+        component: <InWork />,
+      },
+      {
+        tittle: 'opt3',
+        component: <InWork />,
+      },
+    ]
   },
   {
     tittle: 'Relatorio',
-    subMenu: ['opt1', 'opt2', 'opt3']
+    subMenu: [
+      {
+        tittle: 'opt1',
+        component: <InWork />,
+      },
+      {
+        tittle: 'opt2',
+        component: <InWork />,
+      },
+      {
+        tittle: 'opt3',
+        component: <InWork />,
+      },
+    ]
   },
 ]
 

@@ -1,9 +1,12 @@
-import SubMenu from "./SubMenu";
 import { useState } from "react";
 import menuData from "../MenuData";
 import MenuButton from "./buttons/MenuButton";
 
-function SideMenu() {
+type SideMenuProps = {
+  handleRenderClick: (arg: JSX.Element) => void,
+}
+
+function SideMenu({ handleRenderClick }: SideMenuProps) {
 
   const [isSubMenu, setIsSubMenu] = useState('');
 
@@ -17,7 +20,11 @@ function SideMenu() {
             {menuElement.tittle}
           </MenuButton>
           {isSubMenu === menuElement.tittle && menuElement.subMenu?.map((element) =>
-            <MenuButton>{element}</MenuButton>
+            <MenuButton
+              handleClick={() => handleRenderClick(element.component)}
+            >
+              {element.tittle}
+            </MenuButton>
           )}
         </>
       ))}

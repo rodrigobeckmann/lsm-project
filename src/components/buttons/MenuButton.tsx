@@ -1,6 +1,6 @@
 type MenuButtonProps = {
   children: string,
-  handleClick: () => void,
+  handleClick?: () => void,
 }
 
 function MenuButton({ children, handleClick }: MenuButtonProps) {
