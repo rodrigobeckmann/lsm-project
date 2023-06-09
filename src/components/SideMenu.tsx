@@ -1,31 +1,27 @@
 import SubMenu from "./SubMenu";
 import { useState } from "react";
 import menuData from "../MenuData";
+import MenuButton from "./buttons/MenuButton";
 
 function SideMenu() {
 
-  const INITIAL_SUB_MENU = {
-    home: false,
-    register: false,
-    report: false,
-  }
-
-  const [subMenu, setSubMenu] = useState(INITIAL_SUB_MENU);
+  const [isSubMenu, setIsSubMenu] = useState('');
 
   return (
     <nav>
+      {menuData.map((menuElement) => (
+        <>
+          <MenuButton
+            handleClick={() => isSubMenu === menuElement.tittle ? setIsSubMenu('') : setIsSubMenu(menuElement.tittle)}
+          >
+            {menuElement.tittle}
+          </MenuButton>
+          {isSubMenu === menuElement.tittle && menuElement.subMenu?.map((element) =>
+            <MenuButton>{element}</MenuButton>
+          )}
+        </>
+      ))}
 
-      {menuData.map((menuElement) =>
-        <button>{menuElement.tittle}</button>)}
-
-      <button
-        onClick={() => subMenu.home === false ? setSubMenu({ ...subMenu, home: true }) : setSubMenu({ ...subMenu, home: false })}
-        id="home">Inicio</button>
-      {subMenu.home && <SubMenu
-        subArray={['teste1', 'teste2']}
-      />}
-      <button>Cadastros</button>
-      <button>Relatorios</button>
     </nav>
   )
 }
