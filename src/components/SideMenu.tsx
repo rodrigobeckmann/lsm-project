@@ -1,17 +1,20 @@
 import { useState } from "react";
 import menuData from "../MenuData";
 import MenuButton from "./buttons/MenuButton";
+import { useNavigate } from "react-router-dom";
 
-type SideMenuProps = {
-  handleRenderClick: (arg: JSX.Element) => void,
-}
-
-function SideMenu({ handleRenderClick }: SideMenuProps) {
+function SideMenu() {
 
   const [isSubMenu, setIsSubMenu] = useState('');
+  const navigate = useNavigate();
 
   return (
     <nav>
+      <MenuButton
+        handleClick={() => navigate('/')}
+      >
+        Inicio
+      </MenuButton>
       {menuData.map((menuElement) => (
         <>
           <MenuButton
@@ -21,7 +24,7 @@ function SideMenu({ handleRenderClick }: SideMenuProps) {
           </MenuButton>
           {isSubMenu === menuElement.tittle && menuElement.subMenu?.map((element) =>
             <MenuButton
-              handleClick={() => handleRenderClick(element.component)}
+              handleClick={() => navigate(`${menuElement.slug}/${element.slug}`)}
             >
               {element.tittle}
             </MenuButton>

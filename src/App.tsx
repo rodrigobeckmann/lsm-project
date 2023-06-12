@@ -1,36 +1,25 @@
 import './App.css';
-import SideMenu from './components/SideMenu';
-import InWork from './components/InWork';
+import Layout from './components/layout';
+import { Route, Routes } from 'react-router-dom';
+import NotFound from './pages/not-found';
+import menuData from './MenuData';
 import Home from './components/Home';
-import { useState } from 'react';
-
-const home = <Home />;
-
 
 
 function App() {
-
-  const [displayComponent, setDisplayComponent] = useState(home);
-
-  const handleRenderComponentClick = (component: JSX.Element) => {
-    setDisplayComponent(component)
-  }
-
-  const renderComponent = () => {
-    < InWork />
-  }
-
   return (
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<Home />} />
+        {menuData.map((element) =>
+          element.subMenu?.map((menuElement) =>
+            <Route path={`${element.slug}/${menuElement.slug}`} element={menuElement.component} />
+          )
+        )}
 
-    <main>
-      <SideMenu
-        handleRenderClick={handleRenderComponentClick}
-      />
-      <section className='component-container'>
-        {displayComponent}
-      </section>
-    </main>
-
+      </Route>
+      <Route path='/*' element={<NotFound />} />
+    </Routes>
   );
 }
 
